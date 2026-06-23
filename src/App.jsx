@@ -10,6 +10,7 @@ import { Scene } from './components/3d/Scene';
 function App() {
   const cursorRef = useRef(null);
   const ringRef = useRef(null);
+  const rafId = useRef(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -33,12 +34,15 @@ function App() {
         ring.style.left = ringX + 'px';
         ring.style.top = ringY + 'px';
       }
-      requestAnimationFrame(animateRing);
+      rafId.current = requestAnimationFrame(animateRing);
     };
 
     window.addEventListener('mousemove', onMouseMove);
-    animateRing();
-    return () => window.removeEventListener('mousemove', onMouseMove);
+    rafId.current = requestAnimationFrame(animateRing);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      cancelAnimationFrame(rafId.current);
+    };
   }, []);
 
   return (
@@ -54,7 +58,7 @@ function App() {
       <div className="fixed inset-0 z-0" style={{ pointerEvents: 'none' }}>
         <Canvas
           camera={{ position: [0, 0, 6], fov: 50 }}
-          dpr={[1, 2]}
+          dpr={Math.min(window.devicePixelRatio, 2)}
           gl={{ antialias: true, alpha: true }}
         >
           <Scene />

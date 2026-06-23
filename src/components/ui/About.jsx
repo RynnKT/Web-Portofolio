@@ -53,7 +53,7 @@ export function About() {
           </span>
           <h2
             className="font-display font-bold text-3xl md:text-5xl"
-            style={{ color: '#E2E8F0', fontFamily: '"Space Grotesk", sans-serif' }}
+            style={{ color: '#E2E8F0', fontFamily: '"Orbitron", sans-serif' }}
           >
             About Me
           </h2>
@@ -111,7 +111,7 @@ export function About() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className="font-display font-semibold text-base"
-              style={{ color: '#E2E8F0', fontFamily: '"Space Grotesk", sans-serif' }}
+              style={{ color: '#E2E8F0', fontFamily: '"Orbitron", sans-serif' }}
             >
               Technologies I work with
             </motion.p>

@@ -78,7 +78,7 @@ export function Hero() {
           className="font-display font-bold leading-none"
           style={{
             fontSize: 'clamp(2.8rem, 7vw, 5.5rem)',
-            fontFamily: '"Space Grotesk", sans-serif',
+            fontFamily: '"Orbitron", sans-serif',
           }}
         >
           <span className="gradient-text">Erridho</span>

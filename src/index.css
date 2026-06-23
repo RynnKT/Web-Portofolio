@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -10,7 +11,7 @@
   --color-muted-text: #8892A4;
 
   --font-sans: "Inter", sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "Orbitron", sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }
 
@@ -30,6 +31,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   overflow-x: hidden;
+}
+
+h1, h2 {
+  font-family: "Orbitron", sans-serif;
+  letter-spacing: 0.02em;
 }
 
 /* Custom scrollbar */
@@ -185,4 +191,9 @@ body {
 
 .pulse-accent {
   animation: pulse-accent 2s infinite;
+}
+
+/* Hide custom cursor on touch/mobile devices */
+@media (pointer: coarse) {
+  #cursor, #cursor-ring { display: none; }
 }

@@ -1,16 +1,54 @@
-# React + Vite
+# Erridho Ramadhani Setiawan — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Personal portfolio website built with React, Vite, Three.js, and Framer Motion.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **3D Background** — Interactive Three.js canvas scene
+- **Custom Cursor** — Animated cursor with smooth ring follow
+- **Typewriter Effect** — Dynamic role display in the hero section
+- **Animated Sections** — Scroll-triggered animations via Framer Motion
+- **Glass Morphism UI** — Modern dark design with glassmorphism cards
+- **Responsive** — Mobile-friendly with touch cursor hidden on mobile
+- **SEO Ready** — Full meta tags, Open Graph, and Twitter Card support
 
-## React Compiler
+## 🗂 Sections
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Hero** — Name, animated role typewriter, stats, CTA buttons
+- **About** — Bio, terminal-style decoration, skill progress bars
+- **Projects** — Showcase of personal & professional projects
+- **Contact** — Contact form and social links
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Category       | Technology                          |
+|----------------|-------------------------------------|
+| Framework      | React 18 + Vite                     |
+| 3D             | Three.js via @react-three/fiber     |
+| Animation      | Framer Motion                       |
+| Styling        | Tailwind CSS v4 + Vanilla CSS       |
+| Fonts          | Orbitron (display) + Inter (body)   |
+| Deployment     | Vercel / GitHub Pages               |
+
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## 📦 Deploy
+
+Easiest way: connect this repo to **[Vercel](https://vercel.com)** and it deploys automatically on every push.
+
+> **Note:** Update the `og:url`, `canonical`, and `og:image` URLs in `index.html` after deployment.
+
+## 📄 License
+
+MIT — feel free to use as inspiration or template.
