@@ -10,6 +10,7 @@ const projects = [
       'Aplikasi berbasis AI yang membantu guru-guru di madrasah untuk membuat materi pembelajaran, kuis, dan konten edukatif guna menunjang proses mengajar secara lebih efisien dan modern.',
     tech: ['React', 'Node.js', 'AI/ML', 'TailwindCSS'],
     github: 'https://github.com/sanddyyaure14/project_madrasah',
+    demo: 'https://github.com/sanddyyaure14/project_madrasah', // Update with real demo link later
     featured: true,
   },
   {
@@ -19,6 +20,7 @@ const projects = [
       'Platform digital Sistem Informasi Manajemen K3 (Kesehatan & Keselamatan Kerja) yang dirancang untuk memantau, mengelola, dan meningkatkan aspek K3 di lingkungan perusahaan melalui pendekatan berbasis data.',
     tech: ['Laravel', 'MySQL', 'Chart.js', 'Bootstrap'],
     github: 'https://github.com/RynnKT/Project-SehatKerja',
+    demo: 'https://github.com/RynnKT/Project-SehatKerja', // Update with real demo link later
     featured: true,
   },
   {
@@ -28,6 +30,7 @@ const projects = [
       'Aplikasi fullstack untuk mengelola proses pendaftaran peserta secara online. Mencakup backend RESTful API, frontend web yang modern, dan mobile app (Expo/React Native) dalam satu monorepo.',
     tech: ['React', 'Expo', 'Node.js', 'REST API'],
     github: 'https://github.com/RynnKT/PendaftaranPeserta',
+    demo: 'https://github.com/RynnKT/PendaftaranPeserta', // Update with real demo link later
     featured: false,
   },
 ];
@@ -148,7 +151,7 @@ export function Projects() {
                     </svg>
                   </a>
                   <a
-                    href={project.github}
+                    href={project.demo || project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg transition-all duration-200"

@@ -1,13 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { Hero } from './components/ui/Hero';
 import { About } from './components/ui/About';
+import { Experience } from './components/ui/Experience';
 import { Projects } from './components/ui/Projects';
 import { Contact } from './components/ui/Contact';
 import { Navbar } from './components/ui/Navbar';
+import { LoadingScreen } from './components/ui/LoadingScreen';
 import { Scene } from './components/3d/Scene';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const cursorRef = useRef(null);
   const ringRef = useRef(null);
   const rafId = useRef(null);
@@ -47,6 +51,9 @@ function App() {
 
   return (
     <div className="relative w-full bg-bg text-text overflow-x-hidden noise grid-bg">
+      <AnimatePresence mode="wait">
+        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
       {/* Custom cursor */}
       <div id="cursor" ref={cursorRef} />
       <div id="cursor-ring" ref={ringRef} />
@@ -73,6 +80,8 @@ function App() {
         <Hero />
         <div className="section-line" />
         <About />
+        <div className="section-line" />
+        <Experience />
         <div className="section-line" />
         <Projects />
         <div className="section-line" />
