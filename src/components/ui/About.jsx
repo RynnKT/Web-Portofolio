@@ -61,7 +61,7 @@ export function About() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-16">
-          {/* Bio */}
+          {/* Bio & Photo */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -69,11 +69,33 @@ export function About() {
             transition={{ duration: 0.7 }}
             className="flex flex-col gap-5"
           >
-            <p className="text-base leading-relaxed" style={{ color: '#8892A4' }}>
-              Hello! I'm <strong style={{ color: '#E2E8F0' }}>Erridho Ramadhani Setiawan</strong>, a passionate 
-              developer who sits at the intersection of design and engineering. I love building 
-              things that are not just functional — but beautiful and immersive.
-            </p>
+            <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-2">
+              {/* Photo */}
+              <div className="relative shrink-0 group">
+                <div className="w-32 h-32 rounded-2xl overflow-hidden border border-[#3A3A4A] group-hover:border-[#4F6EF7] transition-colors duration-300 relative z-10 bg-[#12121A]">
+                  <img 
+                    src="/profile.jpg" 
+                    alt="Erridho Ramadhani Setiawan" 
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
+                    onError={(e) => { 
+                      e.target.onerror = null; 
+                      e.target.src = 'https://ui-avatars.com/api/?name=Erridho+Ramadhani&background=12121A&color=4F6EF7&size=200&font-size=0.33';
+                    }} 
+                  />
+                </div>
+                {/* Glow behind photo */}
+                <div className="absolute inset-0 rounded-2xl bg-[#4F6EF7] blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10" />
+              </div>
+              
+              {/* Intro Text */}
+              <div className="flex flex-col justify-center h-32">
+                <p className="text-base leading-relaxed" style={{ color: '#8892A4' }}>
+                  Hello! I'm <strong style={{ color: '#E2E8F0' }}>Erridho Ramadhani Setiawan</strong>, a passionate 
+                  developer who sits at the intersection of design and engineering. I love building 
+                  things that are not just functional — but beautiful and immersive.
+                </p>
+              </div>
+            </div>
             <p className="text-base leading-relaxed" style={{ color: '#8892A4' }}>
               My experience spans across full-stack web development, UI/UX design, and creative 
               3D web implementations. I thrive in environments where I can wear multiple hats and 

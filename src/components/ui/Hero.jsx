@@ -43,6 +43,8 @@ function TypeWriter({ words }) {
 }
 
 export function Hero() {
+  const [isAvailable, setIsAvailable] = useState(true);
+
   return (
     <section
       id="hero"
@@ -59,14 +61,16 @@ export function Hero() {
           className="flex items-center gap-3"
         >
           <span
-            className="w-2 h-2 rounded-full pulse-accent"
-            style={{ background: '#4F6EF7' }}
+            className={`w-2 h-2 rounded-full ${isAvailable ? 'pulse-accent' : ''}`}
+            style={{ background: isAvailable ? '#4F6EF7' : '#FEBC2E' }}
           />
           <span
-            className="font-mono text-xs tracking-widest uppercase"
-            style={{ color: '#4F6EF7' }}
+            className="font-mono text-xs tracking-widest uppercase cursor-pointer"
+            style={{ color: isAvailable ? '#4F6EF7' : '#FEBC2E' }}
+            onClick={() => setIsAvailable(!isAvailable)}
+            title="Click to toggle availability"
           >
-            Available for work
+            {isAvailable ? 'Available for work' : 'Currently unavailable'}
           </span>
         </motion.div>
 

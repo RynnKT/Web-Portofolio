@@ -5,9 +5,11 @@ import { Hero } from './components/ui/Hero';
 import { About } from './components/ui/About';
 import { Experience } from './components/ui/Experience';
 import { Projects } from './components/ui/Projects';
+import { Certificates } from './components/ui/Certificates';
 import { Contact } from './components/ui/Contact';
 import { Navbar } from './components/ui/Navbar';
 import { LoadingScreen } from './components/ui/LoadingScreen';
+import { BackToTop } from './components/ui/BackToTop';
 import { Scene } from './components/3d/Scene';
 
 function App() {
@@ -85,8 +87,13 @@ function App() {
         <div className="section-line" />
         <Projects />
         <div className="section-line" />
+        <Certificates />
+        <div className="section-line" />
         <Contact />
       </div>
+      
+      {/* Global Utilities */}
+      <BackToTop />
     </div>
   );
 }
