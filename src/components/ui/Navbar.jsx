@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../../context/LanguageContext';
 
 const NAV_ITEMS = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { key: 'nav.about', href: '#about' },
+  { key: 'nav.experience', href: '#experience' },
+  { key: 'nav.projects', href: '#projects' },
+  { key: 'nav.certificates', href: '#certificates' },
+  { key: 'nav.blog', href: '#blog' },
+  { key: 'nav.contact', href: '#contact' },
 ];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { lang, toggleLanguage, t } = useLanguage();
 
   return (
     <nav
@@ -30,33 +35,44 @@ export function Navbar() {
       </a>
 
       {/* Desktop Nav */}
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden md:flex items-center gap-6 lg:gap-8">
         {NAV_ITEMS.map((item, i) => (
           <a
-            key={item.label}
+            key={item.key}
             href={item.href}
-            className="nav-link font-mono text-sm transition-colors duration-200"
+            className="nav-link font-mono text-xs lg:text-sm transition-colors duration-200"
             style={{ color: '#8892A4' }}
             onMouseEnter={e => e.currentTarget.style.color = '#E2E8F0'}
             onMouseLeave={e => e.currentTarget.style.color = '#8892A4'}
           >
-            <span style={{ color: '#4F6EF7' }}>0{i + 1}.</span> {item.label}
+            <span style={{ color: '#4F6EF7' }}>0{i + 1}.</span> {t(item.key)}
           </a>
         ))}
-        <a
-          href="/resume.pdf"
-          className="px-4 py-2 rounded font-mono text-sm border transition-all duration-200"
-          style={{ borderColor: '#4F6EF7', color: '#4F6EF7' }}
+        
+        {/* Language Switcher */}
+        <button
+          onClick={toggleLanguage}
+          className="ml-2 px-3 py-1.5 rounded font-mono text-xs transition-all duration-200 flex items-center gap-2"
+          style={{ 
+            color: '#E2E8F0', 
+            background: 'rgba(58, 58, 74, 0.3)',
+            border: '1px solid rgba(58, 58, 74, 0.6)'
+          }}
           onMouseEnter={e => {
             e.currentTarget.style.background = 'rgba(79,110,247,0.1)';
+            e.currentTarget.style.borderColor = 'rgba(79,110,247,0.4)';
           }}
           onMouseLeave={e => {
-            e.currentTarget.style.background = 'transparent';
+            e.currentTarget.style.background = 'rgba(58, 58, 74, 0.3)';
+            e.currentTarget.style.borderColor = 'rgba(58, 58, 74, 0.6)';
           }}
         >
-          Resume
-        </a>
+          <span className={lang === 'en' ? 'text-[#4F6EF7] font-bold' : 'opacity-50'}>EN</span>
+          <span className="opacity-30">|</span>
+          <span className={lang === 'id' ? 'text-[#4F6EF7] font-bold' : 'opacity-50'}>ID</span>
+        </button>
       </div>
+
 
       {/* Mobile Menu Button */}
       <button
@@ -83,15 +99,28 @@ export function Navbar() {
         >
           {NAV_ITEMS.map((item, i) => (
             <a
-              key={item.label}
+              key={item.key}
               href={item.href}
               className="font-mono text-sm"
               style={{ color: '#8892A4' }}
               onClick={() => setOpen(false)}
             >
-              <span style={{ color: '#4F6EF7' }}>0{i + 1}.</span> {item.label}
+              <span style={{ color: '#4F6EF7' }}>0{i + 1}.</span> {t(item.key)}
             </a>
           ))}
+          
+          <div className="w-full h-px bg-[#3A3A4A] my-2" />
+          
+          <button
+            onClick={() => { toggleLanguage(); setOpen(false); }}
+            className="font-mono text-sm text-left flex items-center gap-3"
+            style={{ color: '#E2E8F0' }}
+          >
+            Language:
+            <span className={lang === 'en' ? 'text-[#4F6EF7] font-bold' : 'opacity-50'}>EN</span>
+            <span className="opacity-30">/</span>
+            <span className={lang === 'id' ? 'text-[#4F6EF7] font-bold' : 'opacity-50'}>ID</span>
+          </button>
         </motion.div>
       )}
     </nav>

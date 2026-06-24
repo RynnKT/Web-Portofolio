@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { LanguageProvider } from './context/LanguageContext';
 import { AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { Hero } from './components/ui/Hero';
@@ -6,6 +7,7 @@ import { About } from './components/ui/About';
 import { Experience } from './components/ui/Experience';
 import { Projects } from './components/ui/Projects';
 import { Certificates } from './components/ui/Certificates';
+import { Blog } from './components/ui/Blog';
 import { Contact } from './components/ui/Contact';
 import { Navbar } from './components/ui/Navbar';
 import { LoadingScreen } from './components/ui/LoadingScreen';
@@ -52,49 +54,54 @@ function App() {
   }, []);
 
   return (
-    <div className="relative w-full bg-bg text-text overflow-x-hidden noise grid-bg">
-      <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
-      {/* Custom cursor */}
-      <div id="cursor" ref={cursorRef} />
-      <div id="cursor-ring" ref={ringRef} />
+    <LanguageProvider>
+      <div className="relative w-full bg-bg text-text overflow-x-hidden noise grid-bg">
+        <AnimatePresence mode="wait">
+          {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+        </AnimatePresence>
 
-      {/* Scanline */}
-      <div className="scanline" />
+        {/* Custom cursor */}
+        <div id="cursor" ref={cursorRef} />
+        <div id="cursor-ring" ref={ringRef} />
 
-      {/* Fixed 3D Canvas Background */}
-      <div className="fixed inset-0 z-0" style={{ pointerEvents: 'none' }}>
-        <Canvas
-          camera={{ position: [0, 0, 6], fov: 50 }}
-          dpr={Math.min(window.devicePixelRatio, 2)}
-          gl={{ antialias: true, alpha: true }}
-        >
-          <Scene />
-        </Canvas>
+        {/* Scanline */}
+        <div className="scanline" />
+
+        {/* Fixed 3D Canvas Background */}
+        <div className="fixed inset-0 z-0" style={{ pointerEvents: 'none' }}>
+          <Canvas
+            camera={{ position: [0, 0, 6], fov: 50 }}
+            dpr={Math.min(window.devicePixelRatio, 2)}
+            gl={{ antialias: true, alpha: true }}
+          >
+            <Scene />
+          </Canvas>
+        </div>
+
+        {/* Navbar */}
+        <Navbar />
+
+        {/* HTML Overlay Content */}
+        <div className="relative z-10 w-full">
+          <Hero />
+          <div className="section-line" />
+          <About />
+          <div className="section-line" />
+          <Experience />
+          <div className="section-line" />
+          <Projects />
+          <div className="section-line" />
+          <Certificates />
+          <div className="section-line" />
+          <Blog />
+          <div className="section-line" />
+          <Contact />
+        </div>
+
+        {/* Global Utilities */}
+        <BackToTop />
       </div>
-
-      {/* Navbar */}
-      <Navbar />
-
-      {/* HTML Overlay Content */}
-      <div className="relative z-10 w-full">
-        <Hero />
-        <div className="section-line" />
-        <About />
-        <div className="section-line" />
-        <Experience />
-        <div className="section-line" />
-        <Projects />
-        <div className="section-line" />
-        <Certificates />
-        <div className="section-line" />
-        <Contact />
-      </div>
-      
-      {/* Global Utilities */}
-      <BackToTop />
-    </div>
+    </LanguageProvider>
   );
 }
 

@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const ROLES = [
-  'Full Stack Developer',
-  'UI/UX Designer',
-  'Creative Developer',
-  '3D Web Engineer',
-];
+import { useLanguage } from '../../context/LanguageContext';
 
 function TypeWriter({ words }) {
   const [index, setIndex] = useState(0);
@@ -44,6 +38,7 @@ function TypeWriter({ words }) {
 
 export function Hero() {
   const [isAvailable, setIsAvailable] = useState(true);
+  const { t } = useLanguage();
 
   return (
     <section
@@ -68,9 +63,9 @@ export function Hero() {
             className="font-mono text-xs tracking-widest uppercase cursor-pointer"
             style={{ color: isAvailable ? '#4F6EF7' : '#FEBC2E' }}
             onClick={() => setIsAvailable(!isAvailable)}
-            title="Click to toggle availability"
+            title={t(isAvailable ? 'hero.badge_available' : 'hero.badge_unavailable')}
           >
-            {isAvailable ? 'Available for work' : 'Currently unavailable'}
+            {t(isAvailable ? 'hero.badge_available' : 'hero.badge_unavailable')}
           </span>
         </motion.div>
 
@@ -101,7 +96,7 @@ export function Hero() {
           style={{ color: '#8892A4', fontFamily: '"JetBrains Mono", monospace' }}
         >
           {'> '}
-          <TypeWriter words={ROLES} />
+          <TypeWriter words={t('hero.roles')} />
         </motion.div>
 
         {/* Tagline */}
@@ -112,11 +107,11 @@ export function Hero() {
           className="text-base md:text-lg max-w-md"
           style={{ color: '#8892A4', lineHeight: 1.7 }}
         >
-          Turning ideas into{' '}
+          {t('hero.tagline')}{' '}
           <em style={{ color: '#E2E8F0', fontStyle: 'normal', fontWeight: 600 }}>
-            immersive digital experiences
+            {t('hero.tagline_highlight')}
           </em>
-          . I build things that live on the internet.
+          {t('hero.tagline_end')}
         </motion.p>
 
         {/* CTA buttons */}
@@ -143,7 +138,7 @@ export function Hero() {
               e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
-            View Projects
+            {t('hero.btn_projects')}
           </a>
           <a
             href="#contact"
@@ -164,7 +159,7 @@ export function Hero() {
               e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
-            Get In Touch
+            {t('hero.btn_contact')}
           </a>
           <a
             href="/cv.pdf"
@@ -190,7 +185,7 @@ export function Hero() {
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Download CV
+            {t('hero.btn_cv')}
           </a>
         </motion.div>
 
@@ -203,9 +198,9 @@ export function Hero() {
           style={{ borderTop: '1px solid #3A3A4A' }}
         >
           {[
-            { number: '3+', label: 'Years Coding' },
-            { number: '10+', label: 'Projects Built' },
-            { number: '8+', label: 'Technologies' },
+            { number: '3+', label: t('hero.stat_years') },
+            { number: '10+', label: t('hero.stat_projects') },
+            { number: '8+', label: t('hero.stat_tech') },
           ].map(stat => (
             <div key={stat.label}>
               <div
@@ -231,7 +226,7 @@ export function Hero() {
         style={{ pointerEvents: 'none' }}
       >
         <span className="font-mono text-xs tracking-widest uppercase" style={{ color: '#3A3A4A' }}>
-          scroll
+          {t('hero.scroll')}
         </span>
         <div
           className="w-[1px] h-12"

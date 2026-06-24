@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../../context/LanguageContext';
 
 const skills = [
   { name: 'Laravel', level: 88, color: '#FF2D20' },
@@ -23,6 +24,8 @@ const fadeUp = {
 };
 
 export function About() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="about"
@@ -55,7 +58,7 @@ export function About() {
             className="font-display font-bold text-3xl md:text-5xl"
             style={{ color: '#E2E8F0', fontFamily: '"Orbitron", sans-serif' }}
           >
-            About Me
+            {t('about.title')}
           </h2>
           <div className="flex-grow h-px" style={{ background: 'linear-gradient(to right, #3A3A4A, transparent)' }} />
         </motion.div>
@@ -89,21 +92,18 @@ export function About() {
               
               {/* Intro Text */}
               <div className="flex flex-col justify-center h-32">
-                <p className="text-base leading-relaxed" style={{ color: '#8892A4' }}>
-                  Hello! I'm <strong style={{ color: '#E2E8F0' }}>Erridho Ramadhani Setiawan</strong>, a passionate 
-                  developer who sits at the intersection of design and engineering. I love building 
-                  things that are not just functional — but beautiful and immersive.
-                </p>
+                <p 
+                  className="text-base leading-relaxed" 
+                  style={{ color: '#8892A4' }}
+                  dangerouslySetInnerHTML={{ __html: t('about.bio_p1') }}
+                />
               </div>
             </div>
             <p className="text-base leading-relaxed" style={{ color: '#8892A4' }}>
-              My experience spans across full-stack web development, UI/UX design, and creative 
-              3D web implementations. I thrive in environments where I can wear multiple hats and 
-              push the boundaries of what's possible on the web.
+              {t('about.bio_p2')}
             </p>
             <p className="text-base leading-relaxed" style={{ color: '#8892A4' }}>
-              When I'm not coding, I'm usually exploring new design trends, learning cutting-edge 
-              web technologies, or working on personal creative projects.
+              {t('about.bio_p3')}
             </p>
 
             {/* Terminal-style decoration */}
@@ -135,7 +135,7 @@ export function About() {
               className="font-display font-semibold text-base"
               style={{ color: '#E2E8F0', fontFamily: '"Orbitron", sans-serif' }}
             >
-              Technologies I work with
+              {t('about.skills_title')}
             </motion.p>
 
             <div className="flex flex-col gap-4">

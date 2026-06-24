@@ -1,31 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-const experiences = [
-  {
-    year: '2022 - Present',
-    role: 'Full Stack Developer',
-    company: 'Freelance & Open Source',
-    description: 'Developed modern web applications using React, Laravel, and Node.js. Built interactive 3D web experiences using Three.js and React Three Fiber.',
-    tech: ['React', 'Laravel', 'Three.js', 'TailwindCSS'],
-  },
-  {
-    year: '2023 - 2024',
-    role: 'UI/UX Designer',
-    company: 'Creative Studio',
-    description: 'Designed user interfaces for web and mobile applications focusing on user experience, accessibility, and modern aesthetics using Figma.',
-    tech: ['Figma', 'Prototyping', 'Wireframing', 'Design Systems'],
-  },
-  {
-    year: '2020 - 2023',
-    role: 'Software Engineering Student',
-    company: 'Vocational High School / University',
-    description: 'Studied core computer science concepts, algorithms, data structures, and software development methodologies. Actively participated in coding competitions and hackathons.',
-    tech: ['C++', 'Java', 'Algorithms', 'Web Basics'],
-  }
-];
+import { useLanguage } from '../../context/LanguageContext';
 
 export function Experience() {
+  const { t } = useLanguage();
+  const experiences = t('experience.items');
+
   return (
     <section
       id="experience"
@@ -53,7 +33,7 @@ export function Experience() {
             className="font-display font-bold text-3xl md:text-5xl"
             style={{ color: '#E2E8F0', fontFamily: '"Orbitron", sans-serif' }}
           >
-            Experience
+            {t('experience.title')}
           </h2>
           <div className="flex-grow h-px" style={{ background: 'linear-gradient(to right, #3A3A4A, transparent)' }} />
         </motion.div>

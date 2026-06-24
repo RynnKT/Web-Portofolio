@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Award, ExternalLink } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 const certificates = [
   {
@@ -31,6 +32,7 @@ const certificates = [
 
 export function Certificates() {
   const [hovered, setHovered] = useState(null);
+  const { t } = useLanguage();
 
   return (
     <section
@@ -59,7 +61,7 @@ export function Certificates() {
             className="font-display font-bold text-3xl md:text-5xl"
             style={{ color: '#E2E8F0', fontFamily: '"Orbitron", sans-serif' }}
           >
-            Certificates
+            {t('certificates.title')}
           </h2>
           <div className="flex-grow h-px" style={{ background: 'linear-gradient(to right, #3A3A4A, transparent)' }} />
         </motion.div>

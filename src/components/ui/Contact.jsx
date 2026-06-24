@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Send } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 const SOCIAL_LINKS = [
   {
@@ -32,31 +33,16 @@ const SOCIAL_LINKS = [
 ];
 
 export function Contact() {
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [formState, setFormState] = useState('idle');
+  const { t } = useLanguage();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSending(true);
+    setFormState('sending');
     setTimeout(() => {
-      setSending(false);
-      setSent(true);
-      setFormState({ name: '', email: '', message: '' });
+      setFormState('sent');
+      setTimeout(() => setFormState('idle'), 3000);
     }, 1500);
-  };
-
-  const inputStyle = {
-    background: '#12121A',
-    border: '1px solid #3A3A4A',
-    color: '#E2E8F0',
-    borderRadius: '8px',
-    padding: '12px 16px',
-    width: '100%',
-    outline: 'none',
-    fontFamily: '"Inter", sans-serif',
-    fontSize: '14px',
-    transition: 'border-color 0.2s',
   };
 
   return (
@@ -64,7 +50,6 @@ export function Contact() {
       id="contact"
       className="relative min-h-screen py-32 px-6 md:px-16 flex items-center"
     >
-      {/* Center glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
@@ -73,7 +58,6 @@ export function Contact() {
       />
 
       <div className="max-w-5xl mx-auto w-full">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -84,15 +68,14 @@ export function Contact() {
           <span className="font-mono text-sm" style={{ color: '#4F6EF7' }}>03.</span>
           <h2
             className="font-display font-bold text-3xl md:text-5xl"
-            style={{ color: '#E2E8F0', fontFamily: '"Space Grotesk", sans-serif' }}
+            style={{ color: '#E2E8F0', fontFamily: '"Orbitron", sans-serif' }}
           >
-            Get In Touch
+            {t('contact.title')}
           </h2>
           <div className="flex-grow h-px" style={{ background: 'linear-gradient(to right, #3A3A4A, transparent)' }} />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-16">
-          {/* Left — CTA */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -100,22 +83,19 @@ export function Contact() {
             transition={{ duration: 0.7 }}
             className="flex flex-col gap-6"
           >
-            <h3
-              className="font-display font-bold text-2xl md:text-3xl"
-              style={{ color: '#E2E8F0', fontFamily: '"Space Grotesk", sans-serif' }}
-            >
-              Let's Build Something{' '}
-              <span className="gradient-text">Amazing</span> Together
+            <h3 className="text-4xl md:text-6xl font-display font-bold leading-tight" style={{ color: '#E2E8F0' }}>
+              {t('contact.heading1')}<br />
+              <span style={{ color: '#4F6EF7' }}>{t('contact.heading2')}</span> {t('contact.heading3')}.
             </h3>
-            <p className="text-sm leading-relaxed" style={{ color: '#8892A4' }}>
-              I'm currently open to new opportunities. Whether you have a project idea,
-              a question, or just want to connect — my inbox is always open.
+            
+            <p className="text-lg leading-relaxed max-w-md" style={{ color: '#8892A4' }}>
+              {t('contact.subheading1')}
             </p>
-            <p className="text-sm" style={{ color: '#8892A4' }}>
-              I'll try my best to get back to you as soon as possible!
+            
+            <p className="text-lg leading-relaxed max-w-md" style={{ color: '#8892A4' }}>
+              {t('contact.subheading2')}
             </p>
 
-            {/* Social links */}
             <div className="flex flex-col gap-3 mt-4">
               {SOCIAL_LINKS.map((link) => (
                 <a
@@ -149,7 +129,6 @@ export function Contact() {
             </div>
           </motion.div>
 
-          {/* Right — Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -167,77 +146,101 @@ export function Contact() {
                 <span className="w-3 h-3 rounded-full" style={{ background: '#28C840' }} />
               </div>
 
-              <div>
-                <label className="block font-mono text-xs mb-2" style={{ color: '#4F6EF7' }}>
-                  // Your Name
+              <div className="relative">
+                <label className="block font-mono text-sm mb-2" style={{ color: '#818CF8' }}>
+                  {t('contact.form.name')}
                 </label>
                 <input
                   type="text"
                   required
-                  value={formState.name}
-                  onChange={e => setFormState(s => ({ ...s, name: e.target.value }))}
-                  placeholder="John Doe"
-                  style={inputStyle}
-                  onFocus={e => e.target.style.borderColor = '#4F6EF7'}
-                  onBlur={e => e.target.style.borderColor = '#3A3A4A'}
+                  placeholder={t('contact.form.name_placeholder')}
+                  className="w-full bg-transparent border-b-2 py-2 outline-none font-mono transition-colors"
+                  style={{ borderColor: '#3A3A4A', color: '#E2E8F0' }}
+                  onFocus={e => e.currentTarget.style.borderColor = '#4F6EF7'}
+                  onBlur={e => e.currentTarget.style.borderColor = '#3A3A4A'}
                 />
               </div>
 
-              <div>
-                <label className="block font-mono text-xs mb-2" style={{ color: '#4F6EF7' }}>
-                  // Your Email
+              <div className="relative">
+                <label className="block font-mono text-sm mb-2" style={{ color: '#818CF8' }}>
+                  {t('contact.form.email')}
                 </label>
                 <input
                   type="email"
                   required
-                  value={formState.email}
-                  onChange={e => setFormState(s => ({ ...s, email: e.target.value }))}
-                  placeholder="john@example.com"
-                  style={inputStyle}
-                  onFocus={e => e.target.style.borderColor = '#4F6EF7'}
-                  onBlur={e => e.target.style.borderColor = '#3A3A4A'}
+                  placeholder={t('contact.form.email_placeholder')}
+                  className="w-full bg-transparent border-b-2 py-2 outline-none font-mono transition-colors"
+                  style={{ borderColor: '#3A3A4A', color: '#E2E8F0' }}
+                  onFocus={e => e.currentTarget.style.borderColor = '#4F6EF7'}
+                  onBlur={e => e.currentTarget.style.borderColor = '#3A3A4A'}
                 />
               </div>
 
-              <div>
-                <label className="block font-mono text-xs mb-2" style={{ color: '#4F6EF7' }}>
-                  // Message
+              <div className="relative">
+                <label className="block font-mono text-sm mb-2" style={{ color: '#818CF8' }}>
+                  {t('contact.form.message')}
                 </label>
                 <textarea
                   required
-                  rows={5}
-                  value={formState.message}
-                  onChange={e => setFormState(s => ({ ...s, message: e.target.value }))}
-                  placeholder="Tell me about your project..."
-                  style={{ ...inputStyle, resize: 'vertical' }}
-                  onFocus={e => e.target.style.borderColor = '#4F6EF7'}
-                  onBlur={e => e.target.style.borderColor = '#3A3A4A'}
-                />
+                  rows="4"
+                  placeholder={t('contact.form.message_placeholder')}
+                  className="w-full bg-transparent border-b-2 py-2 outline-none font-mono resize-none transition-colors"
+                  style={{ borderColor: '#3A3A4A', color: '#E2E8F0' }}
+                  onFocus={e => e.currentTarget.style.borderColor = '#4F6EF7'}
+                  onBlur={e => e.currentTarget.style.borderColor = '#3A3A4A'}
+                ></textarea>
               </div>
 
               <button
                 type="submit"
-                disabled={sending || sent}
-                className="mt-2 py-3 px-6 rounded-lg font-display font-semibold text-sm transition-all duration-300"
+                disabled={formState !== 'idle'}
+                className="mt-2 py-3 px-6 rounded-lg font-display font-semibold text-sm transition-all duration-300 flex justify-center items-center"
                 style={{
-                  background: sent ? '#28C840' : '#4F6EF7',
+                  background: formState === 'sent' ? '#28C840' : '#4F6EF7',
                   color: '#fff',
-                  cursor: sending || sent ? 'not-allowed' : 'pointer',
+                  cursor: formState !== 'idle' ? 'not-allowed' : 'pointer',
                   boxShadow: '0 0 20px rgba(79,110,247,0.3)',
                   fontFamily: '"Space Grotesk", sans-serif',
                 }}
-                onMouseEnter={e => {
-                  if (!sending && !sent) e.currentTarget.style.boxShadow = '0 0 30px rgba(79,110,247,0.5)';
-                }}
-                onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(79,110,247,0.3)'}
               >
-                {sent ? '✓ Message Sent!' : sending ? 'Sending...' : 'Send Message →'}
+                <AnimatePresence mode="wait">
+                  {formState === 'idle' && (
+                    <motion.span
+                      key="idle"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="flex items-center gap-2"
+                    >
+                      {t('contact.form.btn_send')} <Send size={18} />
+                    </motion.span>
+                  )}
+                  {formState === 'sending' && (
+                    <motion.span
+                      key="sending"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                    >
+                      {t('contact.form.btn_sending')}
+                    </motion.span>
+                  )}
+                  {formState === 'sent' && (
+                    <motion.span
+                      key="sent"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                    >
+                      {t('contact.form.btn_sent')}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </button>
             </form>
           </motion.div>
         </div>
 
-        {/* Footer */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -246,8 +249,7 @@ export function Contact() {
           className="text-center mt-24 pb-8"
         >
           <p className="font-mono text-xs" style={{ color: '#3A3A4A' }}>
-            Designed & Built with ♥ by{' '}
-            <span style={{ color: '#4F6EF7' }}>Erridho Ramadhani Setiawan</span>
+            {t('contact.footer')} <span style={{ color: '#E2E8F0' }}>Erridho Ramadhani Setiawan</span>
           </p>
         </motion.div>
       </div>
